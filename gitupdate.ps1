@@ -41,7 +41,7 @@ git pull
 git-add ./README.md
 git-add ./gitupdate.ps1
 git-add ./.gitignore
-git-add ./ollama/docker-compose.yml
+git-add ./ollama/docker-compose.yaml
 git-add ./ollama/.env
 git-add ./gitea/docker-compose.yml
 git-add ./bitwarden

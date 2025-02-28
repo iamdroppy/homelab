@@ -9,7 +9,7 @@ services:
     environment:
       CLI_ARGS: ""
     ports:
-      - "8188:8188"
+      - ${COMFYUI_PORT:-8188}:8188
     deploy:
       resources:
         reservations:
@@ -55,18 +55,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
-
-  ollama:
-    env_file: .env
-    container_name: ollama
-    restart: unless-stopped
-    volumes:
-      - ${OLLAMA_STORAGE:-./ollama-webui}:/root/.ollama
-    pull_policy: ${OLLAMA_PULL:-missing}
-    tty: true
-    ports:
-     - ${OLLAMA_PORT:-11434}:11434
-    image: ${OLLAMA_IMAGE:-ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}}
     deploy:
       resources:
         reservations:
