@@ -45,6 +45,7 @@ git-add ./ollama/docker-compose.yml
 git-add ./ollama/.env
 git-add ./gitea/docker-compose.yml
 git-add ./bitwarden
+git-add ./gitea/docker-compose.yml
 git-add ./irc/docker-compose.yml
 git-add ./plex/docker-compose.yml
 git-add ./navidrome/docker-environment.yml
