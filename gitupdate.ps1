@@ -7,7 +7,6 @@ function git-push {
 
     Write-Host "Pushing $repo repo to branch $branch in $origin" -ForegroundColor Blue
     git push --set-upstream $origin $branch
-    Write-Host "Done!" -ForegroundColor Green
 }
 
 function git-add {
@@ -34,7 +33,6 @@ function git-send {
     git-push . -branch master -origin origin
     Write-Host "Pushing to github..." -ForegroundColor Blue
     git-push . -branch master -origin gh
-    Write-Host "Done!" -ForegroundColor Green
 }
 
 git-add ./README.md
@@ -51,3 +49,4 @@ git-add ./nextcloud/docker.services.config.env
 git-add ./nextcloud/docker-compose.yml
 git-add ./nginx-proxy-manager/docker-compose.yml
 git-send -message "Update"
+Write-Host "Done!" -ForegroundColor Green
