@@ -1,6 +1,7 @@
 services:
   stirling-pdf:
     image: frooodle/s-pdf:latest
+    restart: unless-stopped
     ports:
       - '5137:8080'
     volumes:
