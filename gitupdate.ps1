@@ -52,5 +52,9 @@ git-add ./navidrome/docker-environment.yml
 git-add ./nextcloud/docker.services.config.env
 git-add ./nextcloud/docker-compose.yml
 git-add ./nginx-proxy-manager/docker-compose.yml
+git-add ./torrent/docker-compose.yml
+git-add ./irc/docker-compose.yml
+git-add ./gotenberg/docker-compose.yml
+git-add ./s-pdf/docker-compose.yml
 git-send -message "Update"
 Write-Host "Done!" -ForegroundColor Green

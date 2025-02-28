@@ -1,0 +1,7 @@
+services:
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: gotenberg_pdf
+    ports:
+      - "3222:3000"
+    restart: unless-stopped
