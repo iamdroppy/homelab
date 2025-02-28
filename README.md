@@ -112,4 +112,4 @@ __Default: missing__
 
  - **weekly:** Compose checks the registry for image updates if the last pull took place more than 7 days ago.
  
- - **every_**__[duration]__: Compose checks the registry for image updates if the last pull took place before <duration>. Duration can be expressed in weeks (w), days (d), hours (h), minutes (m), seconds (s) or a combination of these.
+ - **every_**_[duration]_: Compose checks the registry for image updates if the last pull took place before <duration>. Duration can be expressed in weeks (w), days (d), hours (h), minutes (m), seconds (s) or a combination of these.
