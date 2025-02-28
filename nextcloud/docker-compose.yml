@@ -1,0 +1,58 @@
+# I tawt I taw a puddy tat!
+# Droppy
+
+services:
+  app:
+    image: nextcloud:28.0.14-apache
+    restart: ${RESTART_POLICY:-always}
+    ports:
+      - "${APP_EXPOSE_PORT:-59001}:80"
+    volumes:
+      - ./html:/var/www/html
+    env_file:
+      - docker.services.config.env
+    networks:
+      - nextcloud
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mariadb:10.6
+    restart: ${RESTART_POLICY:-always}
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - ./db:/var/lib/mysql
+    env_file:
+      - docker.services.config.env
+    networks:
+      - nextcloud
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: ${RESTART_POLICY:-always}
+    env_file:
+      - docker.services.config.env
+    ports:
+      - "${PMA_EXPOSE_PORT}:80"
+    environment:
+      PMA_HOST: db
+    networks:
+      - nextcloud
+    depends_on:
+      - db
+
+      
+  redis:
+    container_name: ncredis
+    image: redis
+    restart: ${RESTART_POLICY:-always}
+    env_file:
+      - docker.services.config.env
+    command: redis-server --requirepass 131275LuccaXUfkhkdjV
+    networks:
+      - nextcloud
+
+networks:
+  nextcloud:
+    driver: bridge
