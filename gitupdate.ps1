@@ -35,6 +35,8 @@ function git-send {
     git-push . -branch master -origin gh
 }
 
+git pull
+
 git-add ./README.md
 git-add ./gitupdate.ps1
 git-add ./.gitignore
