@@ -28,7 +28,7 @@ function git-send {
     param (
         [string] $message
     )
-    Write-Host "Commiting with message:\n$message" -ForegroundColor Blue
+    Write-Host "Commiting with message:`n`t$message" -ForegroundColor Blue
     git commit -m $message
     Write-Host "Pushing to origin..." -ForegroundColor Blue
     git-push . -branch master -origin origin
