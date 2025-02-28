@@ -8,6 +8,9 @@
 * **Nginx-Proxy-Manager**: An easy-to-use web-based interface for managing your Nginx proxy server configuration, allowing you to simplify and streamline your workflow.
 * **Ollama**: A self-hosted platform for creating and managing your own digital media library. It provides a user-friendly interface for organizing and sharing your files with others. Also includes **comfyui** and **open-webui**
 * **Plex**: A popular software solution for building and managing your personal media server, providing features like streaming, transcoding, and more to create a seamless viewing experience.
+* **Stirling PDF**: A document management system designed to help teams collaborate and organize their documents more efficiently. It provides a centralized platform for storing, sharing, and versioning PDFs.
+* **Nginx Reverse Proxy**: A web server software that can be used as a reverse proxy server, acting as an intermediary between your internal network and the internet. This allows you to control incoming requests, filter traffic, and improve security.
+* **Torrent for Docker**: A containerized BitTorrent client, allowing users to easily share files over peer-to-peer networks while maintaining a secure and lightweight environment within their Docker containers.
 
 
 __that's all folks__
