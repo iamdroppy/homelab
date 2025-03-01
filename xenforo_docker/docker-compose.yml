@@ -1,0 +1,46 @@
+services:
+  # XenForo forum
+  xenforo:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    ports:
+      - "${XENFORO_PORT}:80"
+    volumes:
+      - ./app/:/var/www/html/
+    networks:
+      - xenforo-network
+
+  # MariaDB database
+  mariadb:
+    image: mariadb:10.5.8
+    env_file: .env
+    restart: ${MYSQL_RESTART_POLICY:-unless-stopped}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Yourverystrongpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASEL-xenforo}
+      MYSQL_USER: ${MYSQL_USER:-xenforo}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-anotherverystrongpassword}
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT:-33306}:3306"
+    networks:
+      - xenforo-network
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "${PHPMYADMIN_HOST}:${PHPMYADMIN_PORT}:80"
+    environment:
+      PMA_HOST: mariadb
+    networks:
+      - xenforo-network
+
+volumes:
+  mariadb-volume:
+
+networks:
+  xenforo-network:
+    driver: bridge
