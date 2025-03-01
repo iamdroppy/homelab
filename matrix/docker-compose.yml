@@ -1,0 +1,28 @@
+services:
+  synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    # Since synapse does not retry to connect to the database, restart upon
+    # failure
+    restart: unless-stopped
+    # See the readme for a full documentation of the environment settings
+    # NOTE: You must edit homeserver.yaml to use postgres, it defaults to sqlite
+    environment:
+      - SYNAPSE_SERVER_NAME=chat.ferri.ws
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+    depends_on:
+      - db
+    volumes:
+      - ./files:/data
+    ports:
+      - 8448:8448/tcp
+  db:
+    image: docker.io/postgres:12-alpine
+    ports:
+      - 15432:5432
+    environment:
+      - POSTGRES_USER=synapse
+      - POSTGRES_DB=db
+      - POSTGRES_PASSWORD=1491jkfj9ar8j3H@R519j9faJJKFJJfknv
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C --locale=en_US.UTF-8
+    volumes:
+      - ./schemas:/var/lib/postgresql/data

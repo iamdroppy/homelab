@@ -63,5 +63,8 @@ git-add ./excelidraw/docker-compose.yml
 git-add ./excelidraw/.env
 git-add ./adguard/.env
 git-add ./font-awesome
-git-send -message "Added font-awesome"
+git-add ./matrix/docker-compose.yml
+git-add ./matrix/sharedgen.py
+git-add ./matrix/files/homeserver.yaml
+git-send -message "Added Matrix"
 Write-Host "Done!" -ForegroundColor Green
