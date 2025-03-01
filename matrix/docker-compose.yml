@@ -19,6 +19,7 @@ services:
     image: docker.io/postgres:12-alpine
     ports:
       - 15432:5432
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=synapse
       - POSTGRES_DB=db

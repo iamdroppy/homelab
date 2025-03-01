@@ -1,5 +1,5 @@
 
-server_name: "chat.ferri.ws"
+server_name: "chat.ferri.one"
 pid_file: /homeserver.pid
 web_client: False
 soft_file_limit: 0
@@ -95,7 +95,7 @@ expire_access_token: False
 
 ## Signing Keys ##
 
-signing_key_path: "/data/chat.ferri.ws.signing.key"
+signing_key_path: "/data/chat.ferri.one.signing.key"
 old_signing_keys: {}
 key_refresh_interval: "1d" # 1 Day.
 
