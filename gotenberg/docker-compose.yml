@@ -1,7 +1,10 @@
 services:
   gotenberg:
-    image: gotenberg/gotenberg:8
-    container_name: gotenberg_pdf
+    env_file: .env
+    image: gotenberg/gotenberg:${TAG:-8}
+    container_name: ${CONTAINER_NAME:-gotenberg_pdf}
     ports:
-      - "3222:3000"
-    restart: unless-stopped
+      - "${PORT:-3222}:3000"
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    command: gotenberg --log-level=${LOG_LEVEL:-info} --api-timeout ${API_TIMEOUT:-30s} --libreoffice-start-timeout ${LIBREOFFICE_START_TIMEOUT:-30s} --webhook-client-timeout ${WEBHOOK_TIMEOUT:-30s} --chromium-start-timeout ${CHROMIUM_START_TIMEOUT:-30s} 

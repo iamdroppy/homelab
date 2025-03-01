@@ -61,5 +61,5 @@ git-add ./portainer/.env
 git-add ./adguard/docker-compose.yml
 git-add ./adguard/.env
 git-add ./font-awesome
-git-send -message "Added adguard and portainer"
+git-send -message "Added font-awesome"
 Write-Host "Done!" -ForegroundColor Green

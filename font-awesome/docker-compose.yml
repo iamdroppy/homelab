@@ -9,3 +9,4 @@ services:
     restart: ${RESTART_POLICY:-unless-stopped}
     volumes:
       - ./app:/usr/share/nginx/html
+      - ./mime.types:/etc/nginx/mime.types
