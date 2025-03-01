@@ -1,0 +1,10 @@
+version: '3'
+services:
+  excalidraw:
+    env_file: .env
+    restart: ${RESTART_POLICY:-unless-stopped}
+    container_name: excalidraw
+    ports:
+      - "${PORT:-5444}:80"
+    image: excalidraw/excalidraw:${TAG:-latest}
+    pull_policy: ${PULL_POLICY:-always}

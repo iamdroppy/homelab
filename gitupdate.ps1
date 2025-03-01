@@ -59,6 +59,8 @@ git-add ./s-pdf/docker-compose.yml
 git-add ./portainer/docker-compose.yml
 git-add ./portainer/.env
 git-add ./adguard/docker-compose.yml
+git-add ./excelidraw/docker-compose.yml
+git-add ./excelidraw/.env
 git-add ./adguard/.env
 git-add ./font-awesome
 git-send -message "Added font-awesome"
