@@ -1,0 +1,11 @@
+services:
+  font-awesome:
+    env_file: .env
+    container_name: font-awesome
+    ports:
+      - ${PORT:-3882}:80
+    image: nginx:${TAG:-latest}
+    pull_policy: ${PULL_POLICY:-missing}
+    restart: ${RESTART_POLICY:-unless-stopped}
+    volumes:
+      - ./app:/usr/share/nginx/html
