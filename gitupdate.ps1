@@ -56,5 +56,9 @@ git-add ./torrent/docker-compose.yml
 git-add ./irc/docker-compose.yml
 git-add ./gotenberg/docker-compose.yml
 git-add ./s-pdf/docker-compose.yml
-git-send -message "Update"
+git-add ./portainer/docker-compose.yml
+git-add ./portainer/.env
+git-add ./adguard/docker-compose.yml
+git-add ./adguard/.env
+git-send -message "Added adguard and portainer"
 Write-Host "Done!" -ForegroundColor Green

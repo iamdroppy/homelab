@@ -1,0 +1,12 @@
+services:
+  portainer:
+    env_file: .env
+    image: portainer/portainer-ce:${TAG:-latest}
+    container_name: portainer
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${DATA_DIR:-latest}:/data
+    ports:
+      - ${PORT:-9000}:9000

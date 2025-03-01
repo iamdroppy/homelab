@@ -1,0 +1,25 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    env_file: .env
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    volumes:
+      - ${PATH_WORK:-./work}:/opt/adguardhome/work
+      - ${PATH_CONFIG:-./config}:/opt/adguardhome/conf
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "68:68/udp"
+      - "${ADMIN_HTTP_PORT:-80}:80/tcp"
+      - "${ADMIN_HTTPS_PORT:-443}:443/tcp"
+      - "${ADMIN_HTTPS_PORT:-443}:443/udp"
+      - "${ADMIN_PANEL_PORT:-3000}:3000/tcp"
+      - "853:853/tcp"
+      - "784:784/udp"
+      - "853:853/udp"
+      - "8853:8853/udp"
+      - "5443:5443/tcp"
+      - "5443:5443/udp"
