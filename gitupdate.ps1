@@ -61,6 +61,8 @@ git-add ./portainer/.env
 git-add ./adguard/docker-compose.yml
 git-add ./excelidraw/docker-compose.yml
 git-add ./excelidraw/.env
+git-add ./draw/docker-compose.yml
+git-add ./draw/.env
 git-add ./adguard/.env
 git-add ./font-awesome
 git-add ./matrix/docker-compose.yml

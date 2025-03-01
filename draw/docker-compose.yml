@@ -1,0 +1,10 @@
+version: '3'
+services:
+  drawio:
+    restart: ${RESTART_POLICY:-unless-stopped}
+    container_name: drawio
+    ports:
+      - "${PORT:-5112}:8080"
+      - "8443:8443"
+    image: jgraph/drawio
+    pull_policy: ${PULL_POLICY:-always}
