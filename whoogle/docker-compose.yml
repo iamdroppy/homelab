@@ -1,0 +1,9 @@
+services:
+  whoogle-search:
+    env_file: .env
+    container_name: ${WHOGLE_CONTAINER_NAME:-whoogle-search}
+    image: benbusby/whoogle-search:${WHOLEPG_TAG:-latest}
+    ports:
+      - ${WHOGLE_PORT:-5000}:5000
+    restart: ${WHOLEPG_RESTART_POLICY:-unless-stopped}
+    pull_policy: ${WHOLEPG_PULL_POLICY:-missing}
