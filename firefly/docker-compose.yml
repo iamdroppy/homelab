@@ -9,8 +9,6 @@ services:
     pull_policy: ${PULL_POLICY:-missing}
     ports:
       - ${FIREFLYIII_PORT:-8080}:8080
-    networks:
-      - external_network
     volumes:
       - ${FIREFLYIII_PATH_UPLOAD:-./upload}:/var/www/html/storage/upload
   mariadb:
@@ -21,6 +19,8 @@ services:
     image: mariadb:${MARIADB_TAG:-10.1}
     restart: ${RESTART_POLICY:-unless-stopped}
     pull_policy: ${PULL_POLICY:-missing}
+    ports:
+      - ${MYSQL_PORT:-3306}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-Changeme_32chars}
       - MYSQL_DATABASE=${MARIADB_DB_NAME:-firefly_iii}
@@ -38,9 +38,3 @@ services:
     pull_policy: ${PULL_POLICY:-missing}
     ports:
       - ${REDIS_PORT:-6379}:6379
-    networks:
-      - external_network
-
-networks:
-  external_network:
-    external: true

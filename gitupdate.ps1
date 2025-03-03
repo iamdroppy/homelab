@@ -38,35 +38,5 @@ function git-send {
 
 git pull
 
-git-add ./README.md
-git-add ./gitupdate.ps1
-git-add ./.gitignore
-git-add ./ollama/docker-compose.yaml
-git-add ./ollama/.env
-git-add ./gitea/docker-compose.yml
-git-add ./bitwarden
-git-add ./gitea/docker-compose.yml
-git-add ./irc/docker-compose.yml
-git-add ./plex/docker-compose.yml
-git-add ./navidrome/docker-environment.yml
-git-add ./nextcloud/docker.services.config.env
-git-add ./nextcloud/docker-compose.yml
-git-add ./nginx-proxy-manager/docker-compose.yml
-git-add ./torrent/docker-compose.yml
-git-add ./irc/docker-compose.yml
-git-add ./gotenberg/docker-compose.yml
-git-add ./s-pdf/docker-compose.yml
-git-add ./portainer/docker-compose.yml
-git-add ./portainer/.env
-git-add ./adguard/docker-compose.yml
-git-add ./excelidraw/docker-compose.yml
-git-add ./excelidraw/.env
-git-add ./draw/docker-compose.yml
-git-add ./draw/.env
-git-add ./adguard/.env
-git-add ./font-awesome
-git-add ./matrix/docker-compose.yml
-git-add ./matrix/sharedgen.py
-git-add ./matrix/files/homeserver.yaml
 git-send -message "Added Matrix"
 Write-Host "Done!" -ForegroundColor Green
