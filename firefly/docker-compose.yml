@@ -1,0 +1,46 @@
+services:
+  firefly-iii:
+    env_file:
+      - path: firefly.env
+        required: true
+    container_name: ${FIREFLYIII_CONTAINER_NAME:-firefly-iii}
+    image: fireflyiii/core:latest
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    ports:
+      - ${FIREFLYIII_PORT:-8080}:8080
+    networks:
+      - external_network
+    volumes:
+      - ${FIREFLYIII_PATH_UPLOAD:-./upload}:/var/www/html/storage/upload
+  mariadb:
+    env_file:
+      - path: mariadb.env
+        required: true
+    container_name: ${MARIADB_CONTAINER_NAME:-mariadb}
+    image: mariadb:${MARIADB_TAG:-10.1}
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-Changeme_32chars}
+      - MYSQL_DATABASE=${MARIADB_DB_NAME:-firefly_iii}
+      - MYSQL_USER=${MARIADB_DB_USERNAME:-firefly_iii_user}
+      - MYSQL_PASSWORD=${MARIADB_DB_PASSWORD:-firefly_iii_password}
+    volumes:
+      - ${FIREFLYIII_PATH_MYSQL_DATA:-./mysql-data}:/var/lib/mysql
+  redis:
+    env_file:
+      - path: redis.env
+        required: true
+    container_name: ${REDIS_CONTAINER_NAME:-redis}
+    image: redis:latest
+    restart: ${RESTART_POLICY:-unless-stopped}
+    pull_policy: ${PULL_POLICY:-missing}
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    external: true
