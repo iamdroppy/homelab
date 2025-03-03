@@ -1,21 +1,14 @@
 services:
-
   ollama:
-    env_file: 
+    env_file:
       - path: ollama.env
         required: true
     container_name: ${OLLAMA_CONTAINER_NAME:-ollama}
     image: ${OLLAMA_IMAGE:-ollama/ollama:latest}
     restart: ${OLLAMA_RESTART_POLICY:-unless-stopped}
-    volumes:
-      - ${OLLAMA_STORAGE:-./ollama-webui}:/root/.ollama
-    pull_policy: ${OLLAMA_PULL:-missing}
     tty: ${OLLAMA_TTY:-true}
     ports:
      - ${OLLAMA_PORT:-11434}:11434
-    profiles:
-      - ${OLLAMA_DISABLED:-}
-   
     deploy:
       resources:
         limits:
@@ -26,23 +19,16 @@ services:
           - driver: ${GPU_DRIVER:-nvidia}
             device_ids: ["0"]
             capabilities: [gpu]
-
   comfyui:
-    env_file: 
+    env_file:
       - path: comfy.env
         required: true
     container_name: ${COMFYUI_CONTAINER_NAME:-comfyui}
     image: ${COMFYUI_IMAGE:-yanwk/comfyui-boot:cu121}
     restart: ${COMFYUI_RESTART_POLICY:-unless-stopped}
-    pull_policy: ${COMFYUI_PULL:-missing}
-    volumes:
-      - ${COMFYUI_STORAGE:-./comfy_storage}:/root
-    environment:
-      CLI_ARGS: ${COMFYUI_CLI_ARGS:-}
+    tty: ${COMFYUI_TTY:-true}
     ports:
-      - ${COMFYUI_PORT:-8188}:8188
-    profiles:
-      - ${COMFYUI_DISABLED:-}
+     - ${COMFYUI_PORT:-8188}:8188
     deploy:
       resources:
         reservations:
@@ -50,40 +36,37 @@ services:
           - driver: ${GPU_DRIVER:-nvidia}
             device_ids: ["0"]
             capabilities: [gpu]
-
   open-webui:
     env_file:
       - path: ui.env
         required: true
     container_name: ${OPEN_WEBUI_CONTAINER_NAME:-open-webui}
     image: ${OPEN_WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:main}
-    volumes:
-      - ${OPEN_WEBUI_STORAGE:-./open-webui}:/app/backend/data
-    pull_policy: ${OPEN_WEBUI_PULL:-missing}
-    depends_on:
-      - ollama
-      - qdrant
-    ports:
-      - ${OPEN_WEBUI_PORT:-3000}:8080
-    extra_hosts:
-      - ${HOST_GATEWAY:-127.0.0.1}:host-gateway
-    profiles:
-      - ${OPEN_WEBUI_DISABLED:-}
     restart: ${OPEN_WEBUI_RESTART_POLICY:-unless-stopped}
-
+    tty: ${OPEN_WEBUI_TTY:-true}
+    ports:
+     - ${OPEN_WEBUI_PORT:-3000}:8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: ${GPU_DRIVER:-nvidia}
+            device_ids: ["0"]
+            capabilities: [gpu]
   qdrant:
-    env_file: 
+    env_file:
       - path: qdrant.env
         required: true
     container_name: ${QDRANT_CONTAINER_NAME:-qdrant}
     image: ${QDRANT_IMAGE:-qdrant/qdrant:latest}
-    pull_policy: ${QDRANT_PULL:-missing}
-    depends_on:
-      - ollama
-    ports:
-      - ${QDRANT_PORT:-6333}:6333
-    profiles:
-      - ${QDRANT_DISABLED:-}
-    volumes:
-      - ${QDRANT_PATH_CONFIG:-./qdrant-config}:/qdrant/config
     restart: ${QDRANT_RESTART_POLICY:-unless-stopped}
+    tty: ${QDRANT_TTY:-true}
+    ports:
+     - ${QDRANT_PORT:-6333}:6333
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: ${GPU_DRIVER:-nvidia}
+            device_ids: ["0"]
+            capabilities: [gpu]
