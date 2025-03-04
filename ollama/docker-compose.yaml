@@ -81,6 +81,6 @@ services:
     pull_policy: ${CHROMA_PULL_POLICY:-missing}
     restart: ${CHROMA_RESTART_POLICY:-unless-stopped}
     volumes:
-      - ${CHROMA_STORAGE:-./chroma-storage}./chromadb:/chroma/chroma
+      - ${CHROMA_STORAGE:-./chroma-storage}:/chroma/chroma
     ports:
-      - ${CHROMA_PORT}:8000
+      - ${CHROMA_PORT:-8000}:8000
