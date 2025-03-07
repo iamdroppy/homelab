@@ -11,6 +11,8 @@ services:
     tty: ${OLLAMA_TTY:-true}
     ports:
      - ${OLLAMA_PORT:-11434}:11434
+    networks:
+      - net
     deploy:
       resources:
         limits:
@@ -28,11 +30,14 @@ services:
     container_name: ${COMFYUI_CONTAINER_NAME:-comfyui}
     image: ${COMFYUI_IMAGE:-yanwk/comfyui-boot:cu121}
     volumes:
-      - ${COMFYUI_STORAGE:-./comfy-storage}:/root
+      - ${COMFYUI_STORAGE_MODELS:-./comfy-storage/models}:/home/runner/ComfyUI/models
+      - ${COMFYUI_STORAGE_OUTPUT:-./comfy-storage/output}:/home/runner/ComfyUI/output
     restart: ${COMFYUI_RESTART_POLICY:-unless-stopped}
     tty: ${COMFYUI_TTY:-true}
     ports:
      - ${COMFYUI_PORT:-8188}:8188
+    networks:
+      - net
     deploy:
       resources:
         reservations:
@@ -52,6 +57,8 @@ services:
     tty: ${OPEN_WEBUI_TTY:-true}
     ports:
      - ${OPEN_WEBUI_PORT:-3000}:8080
+    networks:
+      - net
     deploy:
       resources:
         reservations:
@@ -59,28 +66,21 @@ services:
           - driver: ${GPU_DRIVER:-nvidia}
             device_ids: ["0"]
             capabilities: [gpu]
-  # qdrant:
-  #   env_file:
-  #     - path: qdrant.env
-  #       required: true
-  #   container_name: ${QDRANT_CONTAINER_NAME:-qdrant}
-  #   image: ${QDRANT_IMAGE:-qdrant/qdrant:latest}
-  #   restart: ${QDRANT_RESTART_POLICY:-unless-stopped}
-  #   tty: ${QDRANT_TTY:-true}
-  #   ports:
-  #    - ${QDRANT_PORT:-6333}:6333
-  #   volumes:
-  #    - ${QDRANT_STORAGE:-./qdrant-storage}:/qdrant/storage:z
-
-  chromadb:
+  qdrant:
     env_file:
-      - path: chroma.env
+      - path: qdrant.env
         required: true
-    container_name: ${CHROMA_CONTAINER_NAME:-chroma}
-    image: chromadb/chroma:${CHROMA_TAG:-0.6.3}
-    pull_policy: ${CHROMA_PULL_POLICY:-missing}
-    restart: ${CHROMA_RESTART_POLICY:-unless-stopped}
-    volumes:
-      - ${CHROMA_STORAGE:-./chroma-storage}:/chroma/chroma
+    container_name: ${QDRANT_CONTAINER_NAME:-qdrant}
+    image: ${QDRANT_IMAGE:-qdrant/qdrant:latest}
+    restart: ${QDRANT_RESTART_POLICY:-unless-stopped}
+    tty: ${QDRANT_TTY:-true}
     ports:
-      - ${CHROMA_PORT:-8000}:8000
+     - ${QDRANT_PORT:-6333}:6333
+    volumes:
+     - ${QDRANT_STORAGE:-./qdrant-storage}:/qdrant/storage:z
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
